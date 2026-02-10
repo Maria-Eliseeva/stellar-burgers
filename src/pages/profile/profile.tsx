@@ -1,20 +1,25 @@
 import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
-
+import { useSelector, useDispatch } from '../../services/store';
+import {
+  selectUser,
+  selectIsLoading,
+  selectError
+} from '../../services/user/slice';
+import { updateUser } from '../../services/user/actions';
+import { getOrders } from '../../services/order/actions';
 export const Profile: FC = () => {
-  /** TODO: взять переменную из стора */
-  const user = {
-    name: '',
-    email: ''
-  };
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
 
   const [formValue, setFormValue] = useState({
-    name: user.name,
-    email: user.email,
+    name: user?.name || '',
+    email: user?.email || '',
     password: ''
   });
 
   useEffect(() => {
+    dispatch(getOrders());
     setFormValue((prevState) => ({
       ...prevState,
       name: user?.name || '',
@@ -23,21 +28,32 @@ export const Profile: FC = () => {
   }, [user]);
 
   const isFormChanged =
-    formValue.name !== user?.name ||
-    formValue.email !== user?.email ||
-    !!formValue.password;
+    user &&
+    (formValue.name !== user.name ||
+      formValue.email !== user.email ||
+      !!formValue.password);
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
+
+    const data = {
+      name: formValue.name,
+      email: formValue.email,
+      password: formValue.password
+    };
+
+    dispatch(updateUser(data));
   };
 
   const handleCancel = (e: SyntheticEvent) => {
     e.preventDefault();
-    setFormValue({
-      name: user.name,
-      email: user.email,
-      password: ''
-    });
+    if (user) {
+      setFormValue({
+        name: user.name,
+        email: user.email,
+        password: ''
+      });
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,12 +66,10 @@ export const Profile: FC = () => {
   return (
     <ProfileUI
       formValue={formValue}
-      isFormChanged={isFormChanged}
+      isFormChanged={!!isFormChanged}
       handleCancel={handleCancel}
       handleSubmit={handleSubmit}
       handleInputChange={handleInputChange}
     />
   );
-
-  return null;
 };
