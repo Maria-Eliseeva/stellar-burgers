@@ -25,7 +25,7 @@ export const ResetPassword: FC = () => {
     if (!localStorage.getItem('resetPassword')) {
       navigate('/forgot-password', { replace: true });
     }
-  }, [navigate]);
+  }, []);
 
   return (
     <ResetPasswordUI
