@@ -4,7 +4,7 @@ import {
   orderBurgerApi,
   getFeedsApi,
   getOrderByNumberApi
-} from '@api';
+} from '../../utils/burger-api';
 import { clearIngredient } from '../burger-constructor/slice';
 export const createOrder = createAsyncThunk(
   'order/createOrder',
