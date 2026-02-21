@@ -88,7 +88,7 @@ describe('userSlice асинхронные экшены', () => {
     test('logout.fulfilled сбрасывает пользователя и обновляет флаги', () => {
       const loggedInState = {
         ...initialState,
-        user:user,
+        user: user,
         isAuthChecked: true
       };
       const action = { type: logout.fulfilled.type };

@@ -11,7 +11,7 @@ import { TIngredient, TConstructorIngredient } from '@utils-types';
 const burgerConstructorReducer = burgerConstructorSlice.reducer;
 
 describe('burgerConstructorSlice reducer', () => {
-  const ingredient: TIngredient = {
+  const ingredientBun: TIngredient = {
     _id: '643d69a5c3f7b9001cfa093c',
     name: 'Краторная булка N-200i',
     type: 'bun',
@@ -23,6 +23,19 @@ describe('burgerConstructorSlice reducer', () => {
     image: 'https://code.s3.yandex.net/react/code/bun-02.png',
     image_mobile: 'https://code.s3.yandex.net/react/code/bun-02-mobile.png',
     image_large: 'https://code.s3.yandex.net/react/code/bun-02-large.png'
+  };
+  const ingredientSouse: TIngredient = {
+    _id: '643d69a5c3f7b9001cfa0941',
+    name: 'Биокотлета из марсианской Магнолии',
+    type: 'main',
+    proteins: 420,
+    fat: 142,
+    carbohydrates: 242,
+    calories: 4242,
+    price: 424,
+    image: 'https://code.s3.yandex.net/react/code/meat-01.png',
+    image_mobile: 'https://code.s3.yandex.net/react/code/meat-01-mobile.png',
+    image_large: 'https://code.s3.yandex.net/react/code/meat-01-large.png'
   };
   const ingredient1: TConstructorIngredient = {
     _id: '643d69a5c3f7b9001cfa0941',
@@ -53,15 +66,29 @@ describe('burgerConstructorSlice reducer', () => {
     uniqueId: 'id2'
   };
 
-  test('добавление ингредиента', () => {
+  test('добавление булки', () => {
     const initialState = burgerConstructorSlice.getInitialState();
     const newState = burgerConstructorReducer(
       initialState,
-      addIngredient(ingredient)
+      addIngredient(ingredientBun)
     );
     expect(newState.constructorItems.ingredients).toHaveLength(0);
     expect(newState.constructorItems.bun).toEqual({
-      ...ingredient,
+      ...ingredientBun,
+      uniqueId: expect.any(String)
+    });
+  });
+
+  test('добавление ингредиента(соус)', () => {
+    const initialState = burgerConstructorSlice.getInitialState();
+    const newState = burgerConstructorReducer(
+      initialState,
+      addIngredient(ingredientSouse)
+    );
+    expect(newState.constructorItems.ingredients).toHaveLength(1);
+    expect(newState.constructorItems.bun).toBe(null);
+    expect(newState.constructorItems.ingredients[0]).toEqual({
+      ...ingredientSouse,
       uniqueId: expect.any(String)
     });
   });

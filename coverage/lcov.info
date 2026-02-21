@@ -47,8 +47,8 @@ FN:75,selectconstructorItems
 FNF:7
 FNH:5
 FNDA:0,clearIngredient
-FNDA:1,reducer
-FNDA:1,prepare
+FNDA:2,reducer
+FNDA:2,prepare
 FNDA:1,removeIngredient
 FNDA:1,moveUp
 FNDA:1,moveDown
@@ -80,9 +80,9 @@ DA:24,0
 DA:25,1
 DA:26,1
 DA:27,1
-DA:28,1
-DA:29,1
-DA:30,0
+DA:28,2
+DA:29,2
+DA:30,1
 DA:31,1
 DA:32,1
 DA:33,1
@@ -139,10 +139,10 @@ DA:83,1
 DA:84,1
 DA:85,1
 LF:85
-LH:80
-BRDA:27,0,0,1
-BRDA:30,1,0,0
-BRDA:32,2,0,1
+LH:81
+BRDA:27,0,0,2
+BRDA:29,1,0,1
+BRDA:32,2,0,2
 BRDA:36,3,0,1
 BRDA:40,4,0,0
 BRDA:43,5,0,1
@@ -151,7 +151,7 @@ BRDA:53,7,0,2
 BRDA:62,8,0,1
 BRDA:64,9,0,1
 BRF:10
-BRH:8
+BRH:9
 end_of_record
 TN:
 SF:src/services/ingredients/actions.ts

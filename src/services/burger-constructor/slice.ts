@@ -3,7 +3,10 @@ import { TIngredient } from '@utils-types';
 import { TConstructorIngredient } from '@utils-types';
 import { v4 as uuidv4 } from 'uuid';
 type BurgerConstructorState = {
-  constructorItems: any;
+  constructorItems: {
+    bun: TConstructorIngredient | null;
+    ingredients: TConstructorIngredient[];
+  };
 };
 
 export const initialState: BurgerConstructorState = {

@@ -1,11 +1,6 @@
 import { describe, test, expect } from '@jest/globals';
 import { orderSlice, initialState } from './slice';
-import {
-  createOrder,
-  getOrders,
-  getFeeds,
-  getOrderByNumber
-} from './actions';
+import { createOrder, getOrders, getFeeds, getOrderByNumber } from './actions';
 import { TOrder, TOrdersData } from '../../utils/types';
 
 const orderReducer = orderSlice.reducer;
